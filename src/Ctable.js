@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import 'antd/dist/antd.css';
-import { Table, Tag, Space } from 'antd';
+import { Table, Tag } from 'antd';
 
 
 class Ctable extends Component{
@@ -31,7 +31,7 @@ class Ctable extends Component{
                 <>
                   {tags.map(tag => {
                     let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
+                    if (tag === '985') {
                       color = 'volcano';
                     }
                     return (
