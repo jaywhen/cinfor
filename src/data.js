@@ -32,7 +32,7 @@ let cs_data =
         { "key": 30, "college": "哈尔滨工程大学", "code": 10217, "address": "哈尔滨", "tags": ["B+"] },
         { "key": 31, "college": "复旦大学", "code": 10246, "address": "上海", "tags": ["B+"] },
         { "key": 32, "college": "华东师范大学", "code": 10269, "address": "上海", "tags": ["B+"] },
-        { "key": 33, "college": "东南大学", "code": 10286, "address": "江苏", "tags": ["B+"] },
+        { "key": 33, "college": "东南大学", "code": 10286, "address": "江苏", "tags": ["B+", "985","英1数1","DS,OS,计组"] },
         { "key": 34, "college": "南京航空航天大学", "code": 10287, "address": "江苏", "tags": ["B+"] },
         { "key": 35, "college": "南京理工大学", "code": 10288, "address": "江苏", "tags": ["B+"] },
         { "key": 36, "college": "杭州电子科技大学", "code": 10336, "address": "浙江杭州", "tags": ["B+"] },
