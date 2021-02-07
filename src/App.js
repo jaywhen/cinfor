@@ -1,48 +1,82 @@
-import React, { Component } from 'react';
-import 'antd/dist/antd.css';
-import { Layout, Menu } from 'antd';
-import { Content, Footer, Header } from 'antd/lib/layout/layout';
-import { cs_data, se_data } from "./data";
-import Ctable from "./Ctable";
+import Header from "./component/Header";
+import React, {useState, useEffect} from 'react';
 
-class App extends Component {
+// class App extends Component {
+//   state = {
+//     data: [],
+//   }
+
+//   // Code is invoked after the component is mounted/inserted into the DOM tree.
+//   componentDidMount() {
+//     const url =
+//       'http://localhost:8080/college/findAll'
+
+//     fetch(url)
+//       .then((result) => result.json())
+//       .then((result) => {
+//         this.setState({
+//           data: result,
+//         })
+//       })
+//   }
+
+//   render() {
+//     const {data} = this.state
+    
+//     const result = data.map((entry, index) => {
+//       return (
+//         <li key={index}>
+//           <img src={entry.logo} width="80" alt="test" />
+//           <a href={entry.homePage}>{entry.nameZh}</a>
+//           <h6>{entry.nameShort}</h6>
+//           <h6>{entry.address}</h6>
+//         </li>
+//       )
+//     })
+//     return (
+//       <div>
+//         <Header />
+//         <ul>{result}</ul>
+//       </div>
+//     )
+//   }
+// }
+
+function App() {
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/college/findAll")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
+          setItems(result);
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      )
+    }, []);
   
-  state = {
-    table_data: cs_data,
-  };
-
-  handleClick = e => {
-    // alert("you clicked " + e.key)
-    if(e.key === 'cs'){
-      this.setState({table_data: cs_data})
-      this.setState({current: e.key})
-    } else {
-      this.setState({table_data: se_data})
-      this.setState({current: e.key})
-    }
-  }
-
-  render(){
-    const data = this.state.table_data
-
+  if(error) {
+    return <div>Error: {error.message}</div>;
+  } else if(!isLoaded) {
+    return <div>Loading ... </div>;
+  } else {
     return(
-      <Layout>
-        <Header style={{ position: 'fixed', zIndex: 1, width: '60%', alignSelf: 'center' }}>
-          <Menu theme='dark' mode='horizontal' onClick={this.handleClick} defaultSelectedKeys={['cs']}>
-            <Menu.Item key='cs'>cs</Menu.Item>
-            <Menu.Item key='se'>se</Menu.Item>
-          </Menu>
-        </Header>
-        <Content style={{ marginTop: 64, width: '60%', alignSelf: 'center' }}>
-          <Ctable data={data} />
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          Create by 
-          <a href={'https://github.com/jaywhen'}> Jaywhen</a>
-        </Footer>
-      </Layout>      
-    )
+      <ul>
+        {items.map(item => (
+          <li key={item.collegeId}>
+            {item.nameZh}
+          </li>
+        ))}
+      </ul>
+    );
   }
 }
 
-export default App;
+export default App
